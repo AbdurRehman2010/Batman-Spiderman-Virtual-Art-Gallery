@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batman & Spiderman Virtual Art Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <div class="container">
+        <header>
+            <h1>Batman & Spiderman Virtual Art Gallery</h1>
+        </header>
+        <main>
+            <br>
+            <button id="play-music">Play Music</button>
+
+            <div class="filter">
+                <select id="category-filter">
+                    <option value="all">All</option>
+                    <option value="batman">Batman</option>
+                    <option value="spiderman">Spiderman</option>
+                </select>
+            </div>
+
+
+            <div class="gallery" id="gallery"></div>
+            <div id="image-modal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="modal-image">
+                <div id="modal-caption"></div>
+                <div id="comments-section">
+                    <h3><font color="yellow">Leave a Comment:</font></h3>
+                    <input type="text" id="comment-input" placeholder="Type your comment here...">
+                    <button id="submit-comment">Post</button>
+
+                    <div id="comments"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const artworks = [
+        {
+            src: 'art1.jpg',
+            title: 'Artwork 1',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art2.jpg',
+            title: 'Artwork 1',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art3.jpg',
+            title: 'Artwork 2',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art4.jpg',
+            title: 'Artwork 3',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art5.jpg',
+            title: 'Artwork 4',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art6.jpg',
+            title: 'Artwork 5',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art7.jpg',
+            title: 'Artwork 6',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art8.jpg',
+            title: 'Artwork 7',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+
+        {
+            src: 'art9.jpg',
+            title: 'Artwork 8',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art10.jpg',
+            title: 'Artwork 9',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art11.jpg',
+            title: 'Artwork 10',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art12.jpg',
+            title: 'Artwork 11',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art13.jpg',
+            title: 'Artwork 12',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art15.jpg',
+            title: 'Artwork 13',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+        {
+            src: 'art16.jpg',
+            title: 'Artwork 14',
+            description: 'Description of Artwork 1.',
+            category: 'batman'
+        },
+
+
+
+
+
+
+
+
+
+
+
+        {
+            src: 'arts1.jpg',
+            title: 'Artwork 16',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },        {
+            src: 'arts2.jpg',
+            title: 'Artwork 17',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },        {
+            src: 'arts3.jpg',
+            title: 'Artwork 18',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },        {
+            src: 'arts4.jpg',
+            title: 'Artwork 19',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },        {
+            src: 'arts5.jpg',
+            title: 'Artwork 20',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },
+        {
+            src: 'arts6.jpg',
+            title: 'Artwork 21',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },        {
+            src: 'arts7.jpg',
+            title: 'Artwork 22',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },        {
+            src: 'arts8.jpg',
+            title: 'Artwork 23',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },        {
+            src: 'arts9.jpg',
+            title: 'Artwork 24',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },        {
+            src: 'arts10.jpg',
+            title: 'Artwork 25',
+            description: 'Description of Artwork 2.',
+            category: 'spiderman'
+        },
+        {
+        src: 'arts11.jpg',
+        title: 'Artwork 26',
+        description: 'Description of Artwork 2.',
+        category: 'spiderman'
+    },        {
+        src: 'arts12.jpg',
+        title: 'Artwork 27',
+        description: 'Description of Artwork 2.',
+        category: 'spiderman'
+    },
+    ];
+    
+    const gallery = document.getElementById('gallery');
+    const imageModal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalCaption = document.getElementById('modal-caption');
+    const commentsSection = document.getElementById('comments');
+    const commentInput = document.getElementById('comment-input');
+    const submitCommentBtn = document.getElementById('submit-comment');
+    const closeModal = document.querySelector('.close');
+    const bgMusic = document.getElementById('bg-music');
+    
+    bgMusic.play(); // Play background music
+    
+    function displayArtworks(filteredArtworks) {
+        gallery.innerHTML = '';
+        filteredArtworks.forEach(artwork => {
+            const img = document.createElement('img');
+            img.src = artwork.src;
+            img.alt = artwork.title;
+            img.onclick = () => openModal(artwork);
+            
+            // Set width and height for the images
+            img.style.width = '308px';  // Adjust width here
+            img.style.height = '258px'; // Adjust height here
+            img.style.objectFit = 'cover'; // Make sure the image fits properly
+
+            gallery.appendChild(img);
+        });
+    }
+    
+    function openModal(artwork) {
+        modalImage.src = artwork.src;
+        modalCaption.innerText = `${artwork.title}\n${artwork.description}`;
+        imageModal.style.display = 'block';
+        loadComments(artwork.src);
+    }
+    
+    function loadComments(artworkSrc) {
+        commentsSection.innerHTML = '';
+    }
+    
+    closeModal.onclick = () => {
+        imageModal.style.display = 'none';
+    };
+    
+    submitCommentBtn.onclick = () => {
+        const comment = commentInput.value;
+        if (comment) {
+            const newComment = document.createElement('div');
+            newComment.innerText = comment;
+            commentsSection.appendChild(newComment);
+            commentInput.value = ''; // Clear input
+        }
+    };
+    
+    document.getElementById('category-filter').addEventListener('change', (e) => {
+        const filterValue = e.target.value;
+        const filteredArtworks = artworks.filter(artwork => filterValue === 'all' || artwork.category === filterValue);
+        displayArtworks(filteredArtworks);
+    });
+    
+    displayArtworks(artworks);
+
+
+    document.getElementById('play-music').addEventListener('click', () => {
+        const bgMusic = document.getElementById('bg-music');
+        bgMusic.play().catch(error => {
+            console.log('Audio playback failed:', error);
+        });
+    });
+
+
+    </script>
+</body>
+</html>
